@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>HUBZE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;600;700&family=Archivo+Black&family=Playfair+Display:wght@500;700&family=Poppins:wght@400;600&family=Montserrat:wght@400;600;700&family=Lora:wght@400;600&family=Raleway:wght@400;600&family=Oswald:wght@400;600&family=Nunito:wght@400;700&family=Merriweather:wght@400;700&family=Josefin+Sans:wght@400;600&family=Bebas+Neue&family=Pacifico&family=Dancing+Script:wght@500;700&family=Libre+Baskerville:wght@400;700&family=Quicksand:wght@400;600&family=Rubik:wght@400;600&family=Cormorant+Garamond:wght@500;700&family=Permanent+Marker&family=Sedgwick+Ave+Display&family=Rubik+Spray+Paint&family=Rubik+Wet+Paint&family=Rubik+Dirt&family=Bangers&family=Rock+Salt&family=Frijole&family=Albert+Sans:wght@400;600;700&family=Belanosima:wght@400;600&family=Bricolage+Grotesque:wght@400;600;700&family=Epilogue:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600&family=Inter:wght@400;600;700&family=Lato:wght@400;700&family=M+PLUS+Rounded+1c:wght@400;700&family=Manrope:wght@400;600;700&family=Oxanium:wght@400;600&family=Red+Hat+Display:wght@400;600;700&family=Roboto:wght@400;500;700&family=Space+Grotesk:wght@400;600;700&family=Syne:wght@400;600;700&family=BioRhyme:wght@400;700&family=Bitter:wght@400;600;700&family=Caudex:wght@400;700&family=Corben:wght@400;700&family=Domine:wght@400;700&family=Hahmlet:wght@400;600&family=IBM+Plex+Serif:wght@400;600&family=Noto+Serif:wght@400;700&family=Old+Standard+TT:wght@400;700&family=PT+Serif:wght@400;700&family=Roboto+Serif:wght@400;600&family=Roboto+Slab:wght@400;600;700&family=Source+Serif+4:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&family=Space+Mono:wght@400;700&family=Shantell+Sans:wght@400;600&display=swap">
@@ -622,6 +622,7 @@ body.crmon .main{display:flex;flex-direction:column}
 .pubmode .side,.pubmode .main,.pubmode .pvmode,.pubmode .pv .url,.pubmode .pv .lbl,.pubmode #crm,.pubmode .hzauth{display:none!important}
 .pubmode .app{display:block}.pubmode .pv{position:fixed;inset:0;padding:0;border:0;background:var(--bg)}
 .pubmode .phone{margin:0 auto;width:100%;max-width:520px;height:100%;aspect-ratio:auto;border:0;border-radius:0;box-shadow:none;background:transparent}.pubmode .screen{border-radius:0}
+html,body,.screen{touch-action:manipulation}.pubmode .screen input,.pubmode .screen select,.pubmode .screen textarea{font-size:16px!important}
 html.pubmode,html.pubmode body{overflow:hidden;overscroll-behavior:none;width:100%;height:100%;max-width:100vw}html.pubmode body{position:fixed;inset:0}
 .pubmode .pv,.pubmode .phone{overflow:hidden;max-width:100vw}
 .screen{overflow-x:hidden!important;overscroll-behavior-x:none}.lp{overflow-x:clip;max-width:100%}
@@ -3245,10 +3246,10 @@ function moTargets(lp){const p=P(),out=[];if(!lp||!lp.classList.contains('mo'))r
   if(!p.moBtnOff)lp.querySelectorAll('.b,.lrow,.crow').forEach(x=>{if(!x.closest('.sx'))out.push(x)});
   if(!p.moTxtOff)lp.querySelectorAll('h2,.ro,.bio,.sx h4').forEach(x=>{if(p.moSecOff||!x.closest('.sx'))out.push(x)});
   return out.filter(x=>!x.closest('.pgdrawer,.pgtabs'))}
-function moScan(){const lp=document.querySelector('#screen .lp');if(!MO_IO)MO_IO=new IntersectionObserver(es=>{const rep=P().moRepeat;let n=0;es.forEach(e=>{const el=e.target;if(e.isIntersecting){el.style.transitionDelay=(n++%5)*70+'ms';el.classList.add('moin')}else if(rep){el.style.transitionDelay='0ms';el.classList.remove('moin')}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+function moScan(){const lp=document.querySelector('#screen .lp');if(!MO_IO)MO_IO=new IntersectionObserver(es=>{const rep=P().moRepeat;let n=0;es.forEach(e=>{const el=e.target;if(e.isIntersecting){el.style.transitionDelay=(n++%5)*70+'ms';el.classList.add('moin');MO_SEEN.add(el)}else if(rep){el.style.transitionDelay='0ms';el.classList.remove('moin')}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
   if(!lp||!lp.classList.contains('mo')){MO_IO.disconnect();return}
   const vr=document.getElementById('screen').getBoundingClientRect(),editing=!S.pub&&!MO_PLAY;
-  moTargets(lp).forEach(el=>{if(el.classList.contains('moi'))return;el.classList.add('moi');
+  moTargets(lp).forEach(el=>{if(el.classList.contains('moi'))return;if(MO_SEEN.has(el)&&!P().moRepeat){el.classList.add('moi','moin','monow');requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove('monow')));return}el.classList.add('moi');MO_IO.unobserve(el);
     const r=el.getBoundingClientRect();if(editing&&r.top<vr.bottom&&r.bottom>vr.top){el.classList.add('monow','moin');requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove('monow')))}
     MO_IO.observe(el)});MO_PLAY=false}
 new MutationObserver(()=>{clearTimeout(MO_T);MO_T=setTimeout(moScan,60)}).observe(document.getElementById('screen'),{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
