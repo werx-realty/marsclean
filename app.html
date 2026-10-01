@@ -384,7 +384,7 @@ textarea.in{resize:vertical;min-height:70px}
 @keyframes mueq{from{height:3px}to{height:12px}}
 .lp .ctat .ctapg,.lp .ctat .ctapg .lb{color:var(--p-btntext)!important}.lp .ctat .ctapg{justify-self:center;justify-content:center;text-align:center;margin-top:4px;padding-inline:28px}.lp .ctac.a-left .ctapg{justify-self:start}.lp .ctat .ctapg.full{justify-self:stretch}
 .lp .toimg{width:100%;border-radius:min(var(--p-radius,16px),16px);background:#ccc center/cover no-repeat;margin-bottom:12px}
-.pgtog{all:unset;box-sizing:border-box;cursor:pointer;display:flex;justify-content:space-between;align-items:center;width:100%;gap:10px}.pgtogt{display:grid;gap:2px}.pgtogt b{font-size:16px}.pgtogt small{font-size:12.5px;color:var(--muted)}.pgcar{font-size:14px;color:var(--muted);width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:var(--soft)}
+.pgtog{all:unset;box-sizing:border-box;cursor:pointer;display:flex;justify-content:space-between;align-items:center;width:100%;gap:10px}.pgtogt{display:grid;gap:2px}.pgtogt b{font-size:16px}.pgtogt small{font-size:12.5px;color:var(--muted)}.pgcar{font-size:15px;color:#fff;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#2563EB;box-shadow:0 3px 10px rgba(37,99,235,.35);flex:none}.pgtog:hover .pgcar{background:#1D4ED8}
 .pgcard:not(.pgclosed) .pgtog{margin-bottom:12px}.pgclosed{padding-top:14px;padding-bottom:14px}
 .lp .tipc{display:grid;gap:12px;padding:16px;border-radius:min(var(--p-radius,18px),18px);background:color-mix(in srgb,var(--p-text) 6%,transparent);text-align:left}
 .lp .tiphd{display:flex;gap:12px;align-items:center}.lp .tipjar{font-size:40px;line-height:1}.lp .tipimg{width:56px;height:56px;border-radius:50%;background:#ccc center/cover;flex:none}.lp .tiphd b{display:block;font-size:18px}.lp .tiphd small{font-size:13px;opacity:.8}
@@ -1440,6 +1440,10 @@ html.pubmode,html.pubmode body{overflow:hidden;overscroll-behavior:none;width:10
 .vth{width:96px;aspect-ratio:16/9;border-radius:6px;background:var(--soft) center/cover;display:grid;place-items:center;color:var(--muted);font-weight:700}
 .verr{grid-column:2/-1;color:var(--danger);font-size:12px}
 .fwrap{position:relative}
+.socl{display:grid}.socr{display:grid;grid-template-columns:44px 120px 1fr;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.socr:last-child{border-bottom:0}.socr b{font-weight:500;font-size:15px}
+.soci{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:#fff}.soci svg{width:24px;height:24px}
+.soc-instagram{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}.soc-facebook{background:#1877F2}.soc-tiktok{background:#000}.soc-youtube{background:#FF0000}.soc-linkedin{background:#0A66C2}.soc-x{background:#000}.soc-whatsapp{background:#25D366}.soc-viber{background:#7360F2}
+@media(max-width:560px){.socr{grid-template-columns:40px 1fr}.socr .in{grid-column:1/-1}}
 .fpick{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:12px 14px;cursor:pointer;font-size:17px}
 .fpick small{font-family:Onest,system-ui,sans-serif;font-size:12px;color:var(--accent);font-weight:600}
 .fpop{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:30;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 40px rgba(0,0,0,.18);display:grid;grid-template-rows:auto minmax(0,1fr);max-height:min(460px,60vh);overflow:hidden}
@@ -3886,7 +3890,7 @@ function _renderEditor(){
   }
   if(S.tab==='social'){
     h=`<div class="card"><h3>Social accounts</h3><p class="hint">Paste the full profile link. Empty ones stay hidden.</p>
-      ${SOCIALS.map(([k,l,,ph])=>`<label class="f">${l}<input class="in" id="s-${k}" data-soc="${k}" value="${esc(p.socials[k]||'')}" placeholder="${ph||'Link'}"></label>`).join('')}</div>`;
+      <div class="socl">${SOCIALS.map(([k,l,,ph])=>`<label class="socr"><span class="soci soc-${k}">${svg(SOC_IC[k])}</span><b>${k==='x'?'X (Twitter)':l}</b><input class="in" id="s-${k}" data-soc="${k}" value="${esc(p.socials[k]||'')}" placeholder="${k==='viber'?'https://viber.click/':(ph||'Link')}"></label>`).join('')}</div></div>`;
   }
   if(S.tab==='photos'){
     h=`<div class="card"><h3>Photo &amp; video gallery</h3>${fld('photoTitle','Gallery heading','Photos')}
