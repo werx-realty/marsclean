@@ -927,8 +927,8 @@ footer.foot a{color:var(--pink-deep)}
 
   /* ---------- sign in ---------- */
   /* ====== SUPABASE SETTINGS: paste your project URL and anon (public) key ====== */
-  const SUPABASE_URL = '';        // e.g. https://abcdxyz.supabase.co
-  const SUPABASE_ANON_KEY = '';   // Project Settings → API → anon public key
+  const SUPABASE_URL = 'https://nvniauthckhqvtvykwdc.supabase.co';        // e.g. https://abcdxyz.supabase.co
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52bmlhdXRoY2tocXZ0dnlrd2RjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3ODg1NjQsImV4cCI6MjEwNjM2NDU2NH0.-DjrlHBN5wcfNjAsEDAqI6dMP64Cy3F9aaZlg6vjXB0';   // Project Settings → API → anon public key
   const sb = (SUPABASE_URL && SUPABASE_ANON_KEY && window.supabase) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
   async function showApp(signed){
     $('#login').hidden = signed; $('#crmApp').hidden = !signed; $('#signOut').hidden = !signed;
